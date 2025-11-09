@@ -10,5 +10,6 @@ class DatabaseSeeder extends Seeder
   {
 
     $this->call('MasterBarangSeeder');
+    $this->call('StoresSeeder');
   }
 }
