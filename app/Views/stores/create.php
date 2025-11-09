@@ -3,9 +3,9 @@
 
 <div class="card">
   <div class="card-header align-items-center justify-content-between">
-    <h3 class="card-title m-0"><?= esc($title ?? 'Tambah Barang') ?></h3>
+    <h3 class="card-title m-0"><?= esc($title ?? 'Tambah Outlet') ?></h3>
     <div class="card-tools">
-      <a href="<?= site_url('masterbarang') ?>" class="btn btn-secondary btn-sm">Back</a>
+      <a href="<?= site_url('stores') ?>" class="btn btn-secondary btn-sm">Back</a>
     </div>
   </div>
 
@@ -16,10 +16,10 @@
       </div>
     <?php endif; ?>
 
-    <form action="<?= site_url('masterbarang/store') ?>" method="post">
+    <form action="<?= site_url('stores/store') ?>" method="post">
       <?= csrf_field() ?>
-      <?php $item = null; ?>
-      <?= $this->include('masterbarang/_form') ?>
+      <?php $outlet = null; ?>
+      <?= $this->include('stores/_form') ?>
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>

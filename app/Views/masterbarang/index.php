@@ -8,7 +8,7 @@
       <form method="get" action="<?= site_url('masterbarang') ?>" class="form-inline">
         <input type="text" name="query" value="<?= esc($query ?? '') ?>" class="form-control form-control-sm" placeholder="Cari PCode/Nama...">
       </form>
-      <a href="<?= site_url('masterbarang/create') ?>" class="btn btn-primary btn-sm">+ Add</a>
+      <a href="<?= site_url('masterbarang/create') ?>" class="btn btn-primary btn-sm">+ Tambah Barang</a>
     </div>
   </div>
 

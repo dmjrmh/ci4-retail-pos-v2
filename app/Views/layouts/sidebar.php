@@ -24,6 +24,12 @@
             <p>Discount</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="<?= base_url('stores') ?>" class="nav-link <?= is_active('stores') ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-store"></i>
+            <p>Outlet</p>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
