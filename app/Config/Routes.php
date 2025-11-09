@@ -61,6 +61,16 @@ $routes->delete('discounts/delete/(:num)', 'Discounts::delete/$1');
 $routes->post('discounts/(:num)/details/store', 'Discounts::storeDetail/$1');
 $routes->delete('discounts/details/delete/(:num)', 'Discounts::deleteDetail/$1');
 
+$routes->get('transactions', 'Transactions::index');
+$routes->get('transactions/create', 'Transactions::create');
+$routes->post('transactions/store', 'Transactions::store');
+$routes->post('transactions/preview', 'Transactions::preview');
+$routes->get('transactions/show/(:num)', 'Transactions::show/$1');
+$routes->get('reports/sales', 'Transactions::report');
+
+$routes->get('api/items/(:segment)', 'Transactions::findItem/$1');
+$routes->get('api/discounts/active', 'Transactions::activeDiscounts');
+
 
 /*
  * --------------------------------------------------------------------

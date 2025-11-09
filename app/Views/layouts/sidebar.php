@@ -13,9 +13,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('transaksi') ?>" class="nav-link <?= is_active('transaksi') ? 'active' : '' ?>">
+          <a href="<?= base_url('transactions') ?>" class="nav-link <?= is_active('transactions') ? 'active' : '' ?>">
             <i class="nav-icon fas fa-cash-register"></i>
             <p>Transaksi</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?= base_url('reports/sales') ?>" class="nav-link <?= is_active('reports') ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-chart-line"></i>
+            <p>Laporan Penjualan</p>
           </a>
         </li>
         <li class="nav-item">

@@ -59,7 +59,7 @@
       <thead>
         <tr>
           <th class="text-center">PCode</th>
-          <th>Nama</th>
+          <th class="text-center">Nama</th>
           <th class="text-center">Tipe</th>
           <th class="text-right">Nilai</th>
           <th class="text-center">Aksi</th>
@@ -71,7 +71,7 @@
               <td class="text-monospace"><?= esc($row['PCode']) ?></td>
               <td><?= esc($row['NamaStruk'] ?? $row['NamaLengkap'] ?? '') ?></td>
               <td class="text-center"><?= $row['type'] === 'P' ? 'Persen' : 'Rupiah' ?></td>
-              <td class="text-right"><?= number_format((float)$row['value'], 3) ?></td>
+              <td class="text-right"><?= number_format((float)$row['value'], 2) ?></td>
               <td class="text-center">
                 <form action="<?= site_url('discounts/details/delete/' . $row['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Hapus diskon detail <?= esc($row['PCode']) ?> ?')">
                   <?= csrf_field() ?>
