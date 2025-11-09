@@ -43,9 +43,11 @@
               <td><?= esc($outlet['city']) ?></td>
               <td class="text-center">
                 <a href="<?= site_url('stores/edit/' . ($outlet['id'])) ?>" class="btn btn-sm btn-warning">Edit</a>
-                <a href="<?= site_url('stores/delete/' . ($outlet['id'])) ?>"
-                  class="btn btn-sm btn-danger"
-                  onclick="return confirm('Hapus outlet <?= esc($outlet['name']) ?> ?')">Delete</a>
+                <form action="<?= site_url('stores/delete/' . $outlet['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Hapus outlet <?= $outlet['name'] ?> ?')">
+                  <?= csrf_field() ?>
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
               </td>
             </tr>
           <?php endforeach;

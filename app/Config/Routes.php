@@ -49,7 +49,7 @@ $routes->get('stores/create', 'Stores::create');
 $routes->post('stores/store', 'Stores::store');
 $routes->get('stores/edit/(:num)', 'Stores::edit/$1');
 $routes->post('stores/update/(:num)', 'Stores::update/$1');
-$routes->get('stores/delete/(:num)', 'Stores::delete/$1');
+$routes->delete('stores/delete/(:num)', 'Stores::delete/$1');
 
 
 /*
