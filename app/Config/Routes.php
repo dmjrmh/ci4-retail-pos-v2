@@ -51,6 +51,16 @@ $routes->get('stores/edit/(:num)', 'Stores::edit/$1');
 $routes->post('stores/update/(:num)', 'Stores::update/$1');
 $routes->delete('stores/delete/(:num)', 'Stores::delete/$1');
 
+$routes->get('discounts', 'Discounts::index');
+$routes->get('discounts/create', 'Discounts::create');
+$routes->post('discounts/store', 'Discounts::store');
+$routes->get('discounts/edit/(:num)', 'Discounts::edit/$1');
+$routes->post('discounts/update/(:num)', 'Discounts::update/$1');
+$routes->delete('discounts/delete/(:num)', 'Discounts::delete/$1');
+
+$routes->post('discounts/(:num)/details/store', 'Discounts::storeDetail/$1');
+$routes->delete('discounts/details/delete/(:num)', 'Discounts::deleteDetail/$1');
+
 
 /*
  * --------------------------------------------------------------------

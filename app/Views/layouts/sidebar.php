@@ -19,9 +19,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?= base_url('discount') ?>" class="nav-link <?= is_active('discount') ? 'active' : '' ?>">
+          <a href="<?= base_url('discounts') ?>" class="nav-link <?= is_active('discounts') ? 'active' : '' ?>">
             <i class="nav-icon fas fa-tags"></i>
-            <p>Discount</p>
+            <p>Diskon</p>
           </a>
         </li>
         <li class="nav-item">
