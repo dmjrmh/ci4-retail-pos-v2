@@ -4,17 +4,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MasterbarangModel extends Model
+class TransactionHeaderModel extends Model
 {
-  protected $table            = 'masterbarang';
+  protected $table            = 'transaction_headers';
   protected $primaryKey       = 'id';
   protected $returnType       = 'array';
   protected $useSoftDeletes   = true;
-  protected $useTimestamps = true;
-  protected $allowedFields = [
-    'PCode', 'NamaLengkap', 'NamaStruk', 'SatuanSt',
-    'Harga1c', 'Harga1b', 'Barcode1', 'Status',
-    'created_at', 'updated_at'
+  protected $useTimestamps    = true;
+  protected $allowedFields    = [
+    'store_id', 'NoKassa', 'NoStruk',
+    'Tanggal', 'Waktu', 'Kasir',
+    'TotalItem', 'Subtotal',
+    'TotalDiskon', 'TotalBayar',
+    'Kembali'
   ];
   protected $dateFormat    = 'datetime';
   protected $createdField  = 'created_at';

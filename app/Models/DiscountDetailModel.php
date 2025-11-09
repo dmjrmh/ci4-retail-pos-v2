@@ -6,9 +6,16 @@ use CodeIgniter\Model;
 
 class DiscountDetailModel extends Model
 {
-    protected $table            = 'discountdetail';
-    protected $returnType       = 'array';
-    protected $allowedFields    = [
-      'NoTrans', 'PCode', 'Jenis', 'Nilai'
-    ];
+  protected $table            = 'discount_details';
+  protected $primaryKey       = 'id';
+  protected $returnType       = 'array';
+  protected $useSoftDeletes   = true;
+  protected $useTimestamps = true;
+  protected $allowedFields    = [
+    'discount_id', 'PCode', 'type', 'value',
+  ];
+  protected $dateFormat    = 'datetime';
+  protected $createdField  = 'created_at';
+  protected $updatedField  = 'updated_at';
+  protected $deletedField  = 'deleted_at';
 }
