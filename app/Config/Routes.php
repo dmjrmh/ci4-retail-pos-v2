@@ -8,7 +8,7 @@ $routes = Services::routes();
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
 if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
-    require SYSTEMPATH . 'Config/Routes.php';
+  require SYSTEMPATH . 'Config/Routes.php';
 }
 
 /*
@@ -37,6 +37,41 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('masterbarang', 'Masterbarang::index');
+$routes->get('masterbarang/create', 'Masterbarang::create');
+$routes->post('masterbarang/store', 'Masterbarang::store');
+$routes->get('masterbarang/edit/(:segment)', 'Masterbarang::edit/$1');
+$routes->post('masterbarang/update/(:segment)', 'Masterbarang::update/$1');
+$routes->get('masterbarang/delete/(:segment)', 'Masterbarang::delete/$1');
+
+$routes->get('stores', 'Stores::index');
+$routes->get('stores/create', 'Stores::create');
+$routes->post('stores/store', 'Stores::store');
+$routes->get('stores/edit/(:num)', 'Stores::edit/$1');
+$routes->post('stores/update/(:num)', 'Stores::update/$1');
+$routes->delete('stores/delete/(:num)', 'Stores::delete/$1');
+
+$routes->get('discounts', 'Discounts::index');
+$routes->get('discounts/create', 'Discounts::create');
+$routes->post('discounts/store', 'Discounts::store');
+$routes->get('discounts/edit/(:num)', 'Discounts::edit/$1');
+$routes->post('discounts/update/(:num)', 'Discounts::update/$1');
+$routes->delete('discounts/delete/(:num)', 'Discounts::delete/$1');
+
+$routes->post('discounts/(:num)/details/store', 'Discounts::storeDetail/$1');
+$routes->delete('discounts/details/delete/(:num)', 'Discounts::deleteDetail/$1');
+
+$routes->get('transactions', 'Transactions::index');
+$routes->get('transactions/create', 'Transactions::create');
+$routes->post('transactions/store', 'Transactions::store');
+$routes->post('transactions/preview', 'Transactions::preview');
+$routes->get('transactions/show/(:num)', 'Transactions::show/$1');
+$routes->get('reports/sales', 'Transactions::report');
+
+$routes->get('api/items/(:segment)', 'Transactions::findItem/$1');
+$routes->get('api/discounts/active', 'Transactions::activeDiscounts');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -51,5 +86,5 @@ $routes->get('/', 'Home::index');
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+  require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

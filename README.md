@@ -1,54 +1,62 @@
-# CodeIgniter 4 Framework
+# Retail POS (CI4) — Project Test
 
-## What is CodeIgniter?
+Implementasi aplikasi POS sederhana untuk kebutuhan soal project test. Fitur meliputi transaksi dengan identifikasi outlet, manajemen promo/diskon dinamis, dan report penjualan (summary per outlet + detail transaksi).
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Quick Start
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+- Requirements: PHP 8+, Composer, MySQL/MariaDB
+- Install deps: `composer install`
+- Copy env: `cp env .env` lalu set `database.default.*` dan `app.baseURL`
+- Migrasi + seed: `php spark migrate:refresh && php spark db:seed DatabaseSeeder`
+- Jalankan dev server: `php spark serve` lalu buka `http://localhost:8080`
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Fitur Utama (sesuai soal)
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+- Web app CI4.
+- Relasi tabel: `stores`, `masterbarang`, `transaction_headers`, `transaction_details`, `discount_headers`, `discount_details`.
+- Transaksi menyimpan `store_id` untuk identifikasi outlet asal data.
+- Promo dinamis:
+  - Berlaku pada rentang tanggal dan jam tertentu, aktif/nonaktif per outlet atau global.
+  - Berlaku pada item tertentu (per-PCode) dengan tipe diskon Persen (`P`) atau Rupiah (`R`).
+  - Syarat minimal belanja (`min_amount`).
+  - Perhitungan di server: `Transactions::calculateTotals()` dipakai oleh `preview()` dan `store()` agar konsisten.
+  - UI: panel "Promo Aktif" di atas form transaksi + hint promo per baris item (halaman `Transaksi Baru`).
+- Report penjualan:
+  - Summary total per outlet: halaman `Reports → Sales Report` (`/reports/sales`) lengkap dengan filter tanggal/outlet dan Grand Total di footer.
+  - Daftar transaksi: halaman `Transaksi` (`/transactions`) dengan filter dan total per halaman di footer.
+  - Detail transaksi: klik NoStruk untuk melihat item yang dijual beserta diskon per item.
 
-## Important Change with index.php
+## Routes Utama
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- `GET /transactions` — daftar transaksi (filter + total halaman)
+- `GET /transactions/create` — transaksi baru (preview realtime + info promo aktif)
+- `POST /transactions/preview` — API preview total transaksi
+- `GET /transactions/show/{id}` — detail transaksi (header + item)
+- `GET /api/discounts/active` — API daftar promo aktif per outlet (opsional `pcode`)
+- `GET /reports/sales` — sales report summary per outlet (GRAND TOTAL)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Seeder
 
-**Please** read the user guide for a better explanation of how CI4 works!
+- `MasterBarangSeeder` — contoh data barang
+- `StoresSeeder` — contoh data outlet
+- `DiscountsSeeder` — beberapa promo aktif (tgl: today → +30 hari)
+- `TransactionsSeeder` — membuat transaksi (header+detail) acak 5 hari terakhir per outlet, menghitung diskon sesuai logika promo
 
-## Repository Management
+Jalankan semua via: `php spark db:seed DatabaseSeeder`
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## Catatan
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+- Total pada halaman daftar transaksi adalah total dari baris yang tampil pada halaman aktif (terpengaruh pagination).
+- Proyek ini untuk demonstrasi konsep; belum mencakup autentikasi/otorisasi.
 
-## Contributing
+---
 
-We welcome contributions from the community.
+## CodeIgniter 4 Framework
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+Di bawah ini adalah informasi default dari framework CI4.
 
-## Server Requirements
+CodeIgniter adalah PHP full‑stack web framework yang ringan, cepat, fleksibel, dan aman. Panduan lengkap ada di [User Guide](https://codeigniter4.github.io/userguide/).
 
-PHP version 7.4 or higher is required, with the following extensions installed:
+`index.php` berada di folder `public` — arahkan web server ke folder tersebut.
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Server Requirements: PHP 7.4+ dengan ekstensi `intl`, `mbstring`, serta `json`, `mysqlnd` (untuk MySQL), dan `libcurl` bila menggunakan HTTP\CURLRequest.
